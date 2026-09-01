@@ -1,37 +1,55 @@
-#include "graphics/objects/mesh.hpp"
+// 2D
+// #include "graphics/mesh/primitives.hpp"
+// #include "graphics/object/object2d.hpp"
+// #include "graphics/renderer.hpp"
+// #include "graphics/window.hpp"
+//
+// int main() {
+//   Window::init(1280, 720, "Survival");
+//
+//   Mesh2d mesh(QUAD);
+//   Transform2d transform({100.0f, 100.0f});
+//   Shader shader(DEFAULT_OBJECT2D_VERTEX_SHADER_SOURCE,
+//                 DEFAULT_OBJECT2D_FRAGMENT_SHADER_SOURCE);
+//   Texture texture("/home/suleko/Projects/survival/assets/tommy1.jpg",
+//                   GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+//   Object2d object(mesh, transform, shader, texture);
+//
+//   while (Window::running()) {
+//     Renderer::start(0.0f, 0.0f, 0.0f);
+//
+//     Renderer::Draw(object);
+//
+//     Renderer::end();
+//   }
+//
+//   Window::finish();
+// }
+
+// 3D
+#include "graphics/mesh/primitives.hpp"
+#include "graphics/object/object3d.hpp"
 #include "graphics/renderer.hpp"
-#include "graphics/texture.hpp"
 #include "graphics/window.hpp"
-#include <GLFW/glfw3.h>
 
 int main() {
-  Window::init(800, 600, "Survival");
+  Window::init(1280, 720, "Survival");
 
-  Texture texture("/home/suleko/Projects/survival/assets/cube.png",
-                  GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST);
-  Mesh3d mesh1(CUBE, texture, {0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 1.0f});
+  Mesh3d mesh(CUBE);
+  Transform3d transform;
+  Shader shader(DEFAULT_OBJECT3D_VERTEX_SHADER_SOURCE,
+                DEFAULT_OBJECT3D_FRAGMENT_SHADER_SOURCE);
+  Texture texture("/home/suleko/Projects/survival/assets/tommy1.jpg",
+                  GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+  Object3d object(mesh, transform, shader, texture);
 
   while (Window::running()) {
     Renderer::start(0.0f, 0.0f, 0.0f);
 
-    glm::vec3 dir = {0, 0, 0};
-    if (Window::keyPressed(GLFW_KEY_W)) {
-      dir.x -= 1;
-    }
-    if (Window::keyPressed(GLFW_KEY_S)) {
-      dir.x += 1;
-    }
-    if (Window::keyPressed(GLFW_KEY_D)) {
-      dir.y += 1;
-    }
-    if (Window::keyPressed(GLFW_KEY_A)) {
-      dir.y -= 1;
-    }
+    Renderer::Draw(object);
 
-    mesh1.rot += dir * 0.3f;
-
-    Renderer::draw(mesh1);
     Renderer::end();
   }
+
   Window::finish();
 }

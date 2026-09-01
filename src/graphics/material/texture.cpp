@@ -1,6 +1,6 @@
 #include <print>
 #define STB_IMAGE_IMPLEMENTATION
-#include "graphics/texture.hpp"
+#include "graphics/material/texture.hpp"
 #include "help/utils.hpp"
 #include <glad/glad.h>
 #include <stb_image/stb_image.h>

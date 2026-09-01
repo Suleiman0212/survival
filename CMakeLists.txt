@@ -21,16 +21,30 @@ add_executable(survival
 
     src/graphics/window.cpp
     src/graphics/renderer.cpp
-    src/graphics/texture.cpp
-    src/graphics/objects/sprite.cpp
-    src/graphics/objects/mesh.cpp
+    src/graphics/gui.cpp
+    src/graphics/material/texture.cpp
+    src/graphics/material/shader.cpp
+    src/graphics/mesh/mesh2d.cpp
+    src/graphics/mesh/mesh3d.cpp
+    src/graphics/object/object2d.cpp
+    src/graphics/object/object3d.cpp
 
-    src/glad/glad.c
+    lib/glad/glad.c
+
+    lib/imgui/imgui.cpp
+    lib/imgui/imgui_demo.cpp
+    lib/imgui/imgui_draw.cpp
+    lib/imgui/imgui_tables.cpp
+    lib/imgui/imgui_widgets.cpp
+    lib/imgui/imgui_impl_glfw.cpp
+    lib/imgui/imgui_impl_opengl3.cpp
+
 )
 
 target_include_directories(survival
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/inc
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
 target_link_libraries(survival
