@@ -5,7 +5,7 @@
 #include <imgui/imgui_impl_opengl3.h>
 
 namespace Gui {
-void init() {
+void Init() {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
@@ -15,19 +15,19 @@ void init() {
   ImGui_ImplOpenGL3_Init();
 }
 
-void start() {
+void Start() {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
   // ImGui::ShowDemoWindow();
 }
 
-void end() {
+void End() {
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void finish() {
+void Finish() {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();

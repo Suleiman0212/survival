@@ -5,7 +5,7 @@
 // #include "graphics/window.hpp"
 //
 // int main() {
-//   Window::init(1280, 720, "Survival");
+//   Window::Init(1280, 720, "Survival");
 //
 //   Mesh2d mesh(QUAD);
 //   Transform2d transform({100.0f, 100.0f});
@@ -15,15 +15,15 @@
 //                   GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
 //   Object2d object(mesh, transform, shader, texture);
 //
-//   while (Window::running()) {
-//     Renderer::start(0.0f, 0.0f, 0.0f);
+//   while (Window::Running()) {
+//     Renderer::Start(0.0f, 0.0f, 0.0f);
 //
 //     Renderer::Draw(object);
 //
-//     Renderer::end();
+//     Renderer::End();
 //   }
 //
-//   Window::finish();
+//   Window::Finish();
 // }
 
 // 3D
@@ -33,7 +33,7 @@
 #include "graphics/window.hpp"
 
 int main() {
-  Window::init(1280, 720, "Survival");
+  Window::Init(1280, 720, "Survival");
 
   Mesh3d mesh(CUBE);
   Transform3d transform;
@@ -43,13 +43,13 @@ int main() {
                   GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
   Object3d object(mesh, transform, shader, texture);
 
-  while (Window::running()) {
-    Renderer::start(0.0f, 0.0f, 0.0f);
+  while (Window::Running()) {
+    Renderer::Start(0.0f, 0.0f, 0.0f);
 
     Renderer::Draw(object);
 
-    Renderer::end();
+    Renderer::End();
   }
 
-  Window::finish();
+  Window::Finish();
 }

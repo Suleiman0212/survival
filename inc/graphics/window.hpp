@@ -9,8 +9,8 @@ namespace Window {
 extern GLFWwindow *window;
 extern int width, heigth;
 
-void init(int width, int heigth, const char *title);
-bool running();
-void finish();
-bool keyPressed(int key);
+void Init(int width, int heigth, const char *title);
+bool Running();
+void Finish();
+bool KeyPressed(int key);
 } // namespace Window

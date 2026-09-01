@@ -15,11 +15,11 @@ void Object2d::Draw() {
   model = glm::translate(model, glm::vec3(-transform.pivot, 0.0f));
   model = glm::scale(model, glm::vec3(transform.size, 1.0f));
 
-  shader.bind();
-  shader.setMat4("projection", projection);
-  shader.setMat4("model", model);
+  shader.Bind();
+  shader.SetMat4("projection", projection);
+  shader.SetMat4("model", model);
 
-  texture.bind(GL_TEXTURE0);
-  shader.setInt("textureZero", 0);
+  texture.Bind(GL_TEXTURE0);
+  shader.SetInt("textureZero", 0);
   mesh.Draw();
 }

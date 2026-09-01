@@ -2,12 +2,12 @@
 #include "graphics/window.hpp"
 
 namespace Renderer {
-void start(float red, float green, float blue) {
+void Start(float red, float green, float blue) {
   glClearColor(red, green, blue, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void end() {
+void End() {
   glfwSwapBuffers(Window::window);
   glfwPollEvents();
 }

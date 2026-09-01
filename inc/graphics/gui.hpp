@@ -1,8 +1,8 @@
 #pragma once
 
 namespace Gui {
-void init();
-void start();
-void end();
-void finish();
+void Init();
+void Start();
+void End();
+void Finish();
 } // namespace Gui

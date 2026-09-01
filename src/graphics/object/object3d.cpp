@@ -23,12 +23,12 @@ void Object3d::Draw() {
   model = glm::translate(model, -transform.pivot);
   model = glm::scale(model, transform.size);
 
-  shader.bind();
-  shader.setMat4("view", view);
-  shader.setMat4("projection", projection);
-  shader.setMat4("model", model);
+  shader.Bind();
+  shader.SetMat4("view", view);
+  shader.SetMat4("projection", projection);
+  shader.SetMat4("model", model);
 
-  texture.bind(GL_TEXTURE0);
-  shader.setInt("textureZero", 0);
+  texture.Bind(GL_TEXTURE0);
+  shader.SetInt("textureZero", 0);
   mesh.Draw();
 }

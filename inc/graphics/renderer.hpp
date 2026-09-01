@@ -7,6 +7,6 @@ namespace Renderer {
 
 template <Drawable T> void Draw(T &object) { object.Draw(); }
 
-void start(float red, float green, float blue);
-void end();
+void Start(float red, float green, float blue);
+void End();
 } // namespace Renderer

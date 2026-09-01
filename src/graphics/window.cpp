@@ -12,7 +12,7 @@ namespace Window {
 GLFWwindow *window = NULL;
 int width, heigth;
 
-void init(int _width, int _heigth, const char *title) {
+void Init(int _width, int _heigth, const char *title) {
   width = _width;
   heigth = _heigth;
 
@@ -44,13 +44,13 @@ void init(int _width, int _heigth, const char *title) {
   // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-bool running() { return !glfwWindowShouldClose(window); }
+bool Running() { return !glfwWindowShouldClose(window); }
 
-void finish() {
+void Finish() {
   glfwTerminate();
   Debug::info("window closed");
 }
 
-bool keyPressed(int key) { return (glfwGetKey(window, key) == GLFW_PRESS); }
+bool KeyPressed(int key) { return (glfwGetKey(window, key) == GLFW_PRESS); }
 
 } // namespace Window

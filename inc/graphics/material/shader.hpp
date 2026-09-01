@@ -6,11 +6,11 @@ class Shader {
 public:
   Shader(const char *vertexSource, const char *fragmentSource);
 
-  void bind();
+  void Bind();
 
-  void setMat4(const char *name, glm::mat4 val);
+  void SetMat4(const char *name, glm::mat4 val);
 
-  void setInt(const char *name, int val);
+  void SetInt(const char *name, int val);
 
   ~Shader();
 

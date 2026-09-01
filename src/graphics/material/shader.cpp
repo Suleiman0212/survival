@@ -53,14 +53,14 @@ Shader::Shader(const char *vertexSource, const char *fragmentSource) {
   glDeleteShader(fragmentHandle);
 }
 
-void Shader::bind() { glUseProgram(programHandle); }
+void Shader::Bind() { glUseProgram(programHandle); }
 
-void Shader::setMat4(const char *name, glm::mat4 val) {
+void Shader::SetMat4(const char *name, glm::mat4 val) {
   glUniformMatrix4fv(glGetUniformLocation(programHandle, name), 1, GL_FALSE,
                      glm::value_ptr(val));
 }
 
-void Shader::setInt(const char *name, int val) {
+void Shader::SetInt(const char *name, int val) {
   glUniform1i(glGetUniformLocation(programHandle, name), val);
 }
 
