@@ -31,9 +31,12 @@
 #include "graphics/object/object3d.hpp"
 #include "graphics/renderer.hpp"
 #include "graphics/window.hpp"
+#include "help/debug.hpp"
+#include "input.hpp"
 
 int main() {
   Window::Init(1280, 720, "Survival");
+  Input::Init();
 
   Transform3d cameraTransform;
   Camera3d camera(cameraTransform, 45.0f, 0.01f, 100.0f);
@@ -49,9 +52,12 @@ int main() {
   while (Window::Running()) {
     Renderer::Start(0.0f, 0.0f, 0.0f);
 
-    camera.transform.position.z += 0.01f;
+    if (Input::KeyJustPressed(GLFW_KEY_SPACE)) {
+      Debug::info("DW");
+    }
     object.Draw(camera);
 
+    Input::End();
     Renderer::End();
   }
 

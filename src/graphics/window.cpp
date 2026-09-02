@@ -2,15 +2,15 @@
 #include "help/utils.hpp"
 #include <GLFW/glfw3.h>
 
-void window_size_callback(GLFWwindow *window, int width, int height) {
+namespace Window {
+GLFWwindow *window = NULL;
+int width, heigth;
+
+void SizeCallback(GLFWwindow *window, int width, int height) {
   Window::width = width;
   Window::heigth = height;
   glViewport(0, 0, width, height);
 }
-
-namespace Window {
-GLFWwindow *window = NULL;
-int width, heigth;
 
 void Init(int _width, int _heigth, const char *title) {
   width = _width;
@@ -37,7 +37,7 @@ void Init(int _width, int _heigth, const char *title) {
   Debug::info("GLAD initialized");
 
   glViewport(0, 0, width, heigth);
-  glfwSetFramebufferSizeCallback(window, window_size_callback);
+  glfwSetFramebufferSizeCallback(window, SizeCallback);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_MULTISAMPLE);
   // glEnable(GL_BLEND);
@@ -50,7 +50,5 @@ void Finish() {
   glfwTerminate();
   Debug::info("window closed");
 }
-
-bool KeyPressed(int key) { return (glfwGetKey(window, key) == GLFW_PRESS); }
 
 } // namespace Window

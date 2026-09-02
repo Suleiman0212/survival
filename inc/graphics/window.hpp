@@ -12,5 +12,4 @@ extern int width, heigth;
 void Init(int width, int heigth, const char *title);
 bool Running();
 void Finish();
-bool KeyPressed(int key);
 } // namespace Window

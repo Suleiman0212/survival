@@ -19,12 +19,13 @@ find_package(glfw3 REQUIRED)
 add_executable(survival
     src/main.cpp
 
+    src/input.cpp
     src/graphics/window.cpp
     src/graphics/renderer.cpp
     src/graphics/gui.cpp
     src/graphics/material/texture.cpp
     src/graphics/material/shader.cpp
-    src/graphics/camera/camera.cpp
+    src/graphics/camera/camera3d.cpp
     src/graphics/mesh/mesh2d.cpp
     src/graphics/mesh/mesh3d.cpp
     src/graphics/object/object2d.cpp
