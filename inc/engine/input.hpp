@@ -2,7 +2,8 @@
 
 namespace Input {
 void Init();
-void End();
+void StartFrame();
+void EndFrame();
 bool KeyPressed(int key);
 bool KeyJustPressed(int key);
 } // namespace Input

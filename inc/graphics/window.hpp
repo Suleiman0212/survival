@@ -10,6 +10,8 @@ extern GLFWwindow *window;
 extern int width, heigth;
 
 void Init(int width, int heigth, const char *title);
+void StartFrame(float red, float green, float blue);
+void EndFrame();
 bool Running();
 void Finish();
 } // namespace Window

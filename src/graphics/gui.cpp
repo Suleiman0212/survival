@@ -15,14 +15,14 @@ void Init() {
   ImGui_ImplOpenGL3_Init();
 }
 
-void Start() {
+void StartFrame() {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
   // ImGui::ShowDemoWindow();
 }
 
-void End() {
+void EndFrame() {
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

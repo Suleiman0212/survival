@@ -2,7 +2,7 @@
 
 namespace Gui {
 void Init();
-void Start();
-void End();
+void StartFrame();
+void EndFrame();
 void Finish();
 } // namespace Gui

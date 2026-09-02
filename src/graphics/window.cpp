@@ -44,6 +44,13 @@ void Init(int _width, int _heigth, const char *title) {
   // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
+void StartFrame(float red, float green, float blue) {
+  glClearColor(red, green, blue, 1.0f);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void EndFrame() { glfwSwapBuffers(window); }
+
 bool Running() { return !glfwWindowShouldClose(window); }
 
 void Finish() {

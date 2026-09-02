@@ -1,4 +1,4 @@
-#include "input.hpp"
+#include "engine/input.hpp"
 #include "graphics/window.hpp"
 
 struct KeyState {
@@ -25,7 +25,9 @@ bool KeyPressed(int key) { return keys[key].pressed; }
 
 bool KeyJustPressed(int key) { return keys[key].justPressed; }
 
-void End() {
+void StartFrame() { glfwPollEvents(); }
+
+void EndFrame() {
   for (auto &key : keys) {
     key.justPressed = false;
   }
