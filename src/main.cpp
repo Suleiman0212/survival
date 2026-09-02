@@ -18,7 +18,7 @@
 //   while (Window::Running()) {
 //     Renderer::Start(0.0f, 0.0f, 0.0f);
 //
-//     Renderer::Draw(object);
+//     object.Draw();
 //
 //     Renderer::End();
 //   }
@@ -35,18 +35,22 @@
 int main() {
   Window::Init(1280, 720, "Survival");
 
-  Mesh3d mesh(CUBE);
-  Transform3d transform;
-  Shader shader(DEFAULT_OBJECT3D_VERTEX_SHADER_SOURCE,
-                DEFAULT_OBJECT3D_FRAGMENT_SHADER_SOURCE);
-  Texture texture("/home/suleko/Projects/survival/assets/tommy1.jpg",
-                  GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
-  Object3d object(mesh, transform, shader, texture);
+  Transform3d cameraTransform;
+  Camera3d camera(cameraTransform, 45.0f, 0.01f, 100.0f);
+
+  Mesh3d objectMesh(CUBE);
+  Transform3d objectTransform;
+  Shader objectShader(DEFAULT_OBJECT3D_VERTEX_SHADER_SOURCE,
+                      DEFAULT_OBJECT3D_FRAGMENT_SHADER_SOURCE);
+  Texture objectTexture("/home/suleko/Projects/survival/assets/tommy1.jpg",
+                        GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
+  Object3d object(objectMesh, objectTransform, objectShader, objectTexture);
 
   while (Window::Running()) {
     Renderer::Start(0.0f, 0.0f, 0.0f);
 
-    Renderer::Draw(object);
+    camera.transform.position.z += 0.01f;
+    object.Draw(camera);
 
     Renderer::End();
   }

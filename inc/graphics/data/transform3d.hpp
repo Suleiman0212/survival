@@ -1,5 +1,6 @@
 #pragma once
 
+#include "glm/gtc/matrix_transform.hpp"
 #include <glm/glm.hpp>
 
 class Transform3d {
@@ -18,4 +19,19 @@ public:
   glm::vec3 size = {1.0f, 1.0f, 1.0f};
   glm::vec3 pivot = {0.0f, 0.0f, 0.0f};
   glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
+
+  glm::mat4 Model() {
+    glm::mat4 model(1.0f);
+    model = glm::translate(model, position);
+    model = glm::translate(model, pivot);
+    model = glm::rotate(model, glm::radians(rotation.x),
+                        glm::vec3(1.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(position.y),
+                        glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(rotation.z),
+                        glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::translate(model, -pivot);
+    model = glm::scale(model, size);
+    return model;
+  }
 };

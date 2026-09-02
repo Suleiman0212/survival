@@ -53,6 +53,8 @@ Shader::Shader(const char *vertexSource, const char *fragmentSource) {
   glDeleteShader(fragmentHandle);
 }
 
+Shader::~Shader() { glDeleteProgram(programHandle); }
+
 void Shader::Bind() { glUseProgram(programHandle); }
 
 void Shader::SetMat4(const char *name, glm::mat4 val) {
@@ -63,5 +65,3 @@ void Shader::SetMat4(const char *name, glm::mat4 val) {
 void Shader::SetInt(const char *name, int val) {
   glUniform1i(glGetUniformLocation(programHandle, name), val);
 }
-
-Shader::~Shader() { glDeleteProgram(programHandle); }

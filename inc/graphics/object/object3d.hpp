@@ -1,5 +1,6 @@
 #pragma once
 
+#include "graphics/camera/camera3d.hpp"
 #include "graphics/data/transform3d.hpp"
 #include "graphics/material/shader.hpp"
 #include "graphics/material/texture.hpp"
@@ -43,7 +44,7 @@ public:
            Texture &texture)
       : mesh(mesh), transform(transform), shader(shader), texture(texture) {}
 
-  void Draw();
+  void Draw(Camera3d camera);
 
   Mesh3d &mesh;
   Transform3d &transform;

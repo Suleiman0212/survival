@@ -24,6 +24,7 @@ add_executable(survival
     src/graphics/gui.cpp
     src/graphics/material/texture.cpp
     src/graphics/material/shader.cpp
+    src/graphics/camera/camera.cpp
     src/graphics/mesh/mesh2d.cpp
     src/graphics/mesh/mesh3d.cpp
     src/graphics/object/object2d.cpp

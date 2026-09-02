@@ -25,6 +25,8 @@ Texture::Texture(const char *path, int min_filter, int mag_filter) {
   stbi_image_free(data);
 }
 
+Texture::~Texture() { glDeleteTextures(1, &handle); }
+
 void Texture::Bind(unsigned int id) {
   glActiveTexture(id);
   glBindTexture(GL_TEXTURE_2D, handle);

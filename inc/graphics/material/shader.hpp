@@ -5,14 +5,13 @@
 class Shader {
 public:
   Shader(const char *vertexSource, const char *fragmentSource);
+  ~Shader();
 
   void Bind();
 
   void SetMat4(const char *name, glm::mat4 val);
 
   void SetInt(const char *name, int val);
-
-  ~Shader();
 
 private:
   unsigned int vertexHandle, fragmentHandle;
