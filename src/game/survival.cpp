@@ -22,9 +22,9 @@ struct State {
               DEFAULT_OBJECT3D_FRAGMENT_SHADER_SOURCE
           ),
           objectTexture(
-              "/home/suleko/Projects/survival/assets/tommy1.jpg",
-              GL_LINEAR_MIPMAP_LINEAR,
-              GL_LINEAR
+              "/home/suleko/Projects/survival/assets/cubet.png",
+              GL_NEAREST_MIPMAP_NEAREST,
+              GL_NEAREST
           ),
           object(
               objectMesh,

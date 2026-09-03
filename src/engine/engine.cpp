@@ -12,8 +12,8 @@ void Engine::Run() {
     Render();
 
     Input::EndFrame();
-    Window::EndFrame();
     Gui::EndFrame();
+    Window::EndFrame();
   }
 }
 

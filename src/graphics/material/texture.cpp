@@ -6,8 +6,8 @@
 #include <stb_image/stb_image.h>
 
 Texture::Texture(const char *path, int min_filter, int mag_filter) {
-  int width, heith, channels;
-  unsigned char *data = stbi_load(path, &width, &heith, &channels, 0);
+  int width, heith;
+  unsigned char *data = stbi_load(path, &width, &heith, NULL, 4);
   if (!data) {
     std::print("ERROR: failed to load texture \"{}\"", path);
     Utils::quit();
@@ -19,7 +19,7 @@ Texture::Texture(const char *path, int min_filter, int mag_filter) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, heith, 0, GL_RGB,
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, heith, 0, GL_RGBA,
                GL_UNSIGNED_BYTE, data);
   glGenerateMipmap(GL_TEXTURE_2D);
   stbi_image_free(data);
