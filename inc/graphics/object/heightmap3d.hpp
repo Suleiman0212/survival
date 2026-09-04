@@ -9,7 +9,7 @@
 
 class HeightMap3d {
 public:
-  HeightMap3d(glm::vec2 size, float scale, Transform3d &transform,
+  HeightMap3d(glm::vec2 size, glm::ivec2 resolution, Transform3d &transform,
               Shader &shader, Texture &texture);
 
   void Draw(Camera3d &camera);
@@ -19,7 +19,7 @@ public:
 private:
   std::optional<Mesh3d> mesh;
   glm::vec2 size;
-  float scale;
+  glm::ivec2 resolution;
   Shader &shader;
   Texture &texture;
 };

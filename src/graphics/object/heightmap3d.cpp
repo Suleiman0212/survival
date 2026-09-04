@@ -1,42 +1,50 @@
 #include "graphics/object/heightmap3d.hpp"
 #include "graphics/mesh/mesh3d.hpp"
-#include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <glad/glad.h>
 
-float GetY(float x, float z) {
-  return sin(x * 1.0f) * 1.0f + cos(z * 0.5f) * 0.5f;
-}
-
-HeightMap3d::HeightMap3d(glm::vec2 size, float scale, Transform3d &transform,
-                         Shader &shader, Texture &texture)
-    : size(size), scale(scale), transform(transform), shader(shader),
+HeightMap3d::HeightMap3d(glm::vec2 size, glm::ivec2 resolution,
+                         Transform3d &transform, Shader &shader,
+                         Texture &texture)
+    : size(size), resolution(resolution), transform(transform), shader(shader),
       texture(texture) {
+  srand(time(NULL));
   std::vector<Mesh3dVertex> vertices;
   std::vector<Mesh3dIndex> indices;
 
-  for (int z = 0; z < size.y; z++) {
-    for (int x = 0; x < size.x; x++) {
-      float x0 = x * scale;
-      float x1 = (x + 1) * scale;
-      float z0 = z * scale;
-      float z1 = (z + 1) * scale;
+  const int vertexCountX = resolution.x + 1;
+  const int vertexCountZ = resolution.x + 1;
 
-      float u0 = (float)x / (size.x - 1);
-      float u1 = (float)(x + 1) / (size.x - 1);
-      float v0 = (float)z / (size.y - 1);
-      float v1 = (float)(z + 1) / (size.y - 1);
-      vertices.push_back({{x0, GetY(x0, z0), z0}, {u0, v0}});
-      vertices.push_back({{x1, GetY(x1, z0), z0}, {u1, v0}});
-      vertices.push_back({{x0, GetY(x0, z1), z1}, {u0, v1}});
-      vertices.push_back({{x1, GetY(x1, z1), z1}, {u1, v1}});
+  vertices.reserve(vertexCountX * vertexCountZ);
+  indices.reserve(resolution.x * resolution.y * 6);
 
-      int i = (z * size.x + x) * 4;
-      indices.push_back(i);
-      indices.push_back(i + 1);
-      indices.push_back(i + 2);
-      indices.push_back(i + 1);
-      indices.push_back(i + 2);
-      indices.push_back(i + 3);
+  for (int z = 0; z < vertexCountZ; z++) {
+    for (int x = 0; x < vertexCountX; x++) {
+      float u = (float)x / resolution.x;
+      float v = (float)z / resolution.y;
+      float xpos = u * size.x;
+      float zpos = v * size.y;
+      float ypos = (float)rand() / RAND_MAX * 0.3f;
+
+      vertices.push_back({{xpos, ypos, zpos}, {u, v}});
+    }
+  }
+
+  for (int z = 0; z < resolution.y - 1; z++) {
+    for (int x = 0; x < resolution.x - 1; x++) {
+      Mesh3dIndex topLeft = (z * vertexCountX + x);
+      Mesh3dIndex topRight = (z * vertexCountX + x + 1);
+      Mesh3dIndex bottomLeft = ((z + 1) * vertexCountX + x);
+      Mesh3dIndex bottomRight = ((z + 1) * vertexCountX + x + 1);
+
+      indices.push_back(topLeft);
+      indices.push_back(bottomLeft);
+      indices.push_back(topRight);
+
+      indices.push_back(topRight);
+      indices.push_back(bottomLeft);
+      indices.push_back(bottomRight);
     }
   }
 

@@ -1,4 +1,5 @@
 #include "game/survival.hpp"
+#include "glm/detail/type_vec.hpp"
 #include "graphics/object/heightmap3d.hpp"
 
 namespace Survival {
@@ -49,8 +50,8 @@ struct State {
               GL_LINEAR
           ),
           heightmap(
-              glm::vec2(100, 100),
-              0.2f,
+              glm::vec2(10.0f, 10.0f),
+              glm::ivec2(64, 64),
               heightmapTransform,
               heightmapShader,
               heightmapTexture
