@@ -4,17 +4,17 @@
 
 namespace Window {
 GLFWwindow *window = NULL;
-int width, heigth;
+int width, height;
 
 void SizeCallback(GLFWwindow *window, int width, int height) {
   Window::width = width;
-  Window::heigth = height;
+  Window::height = height;
   glViewport(0, 0, width, height);
 }
 
 void Init(int _width, int _heigth, const char *title) {
   width = _width;
-  heigth = _heigth;
+  height = _heigth;
 
   glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
   glfwInit();
@@ -23,7 +23,7 @@ void Init(int _width, int _heigth, const char *title) {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_SAMPLES, 4);
 
-  Window::window = glfwCreateWindow(width, heigth, title, NULL, NULL);
+  Window::window = glfwCreateWindow(width, height, title, NULL, NULL);
   if (window == NULL) {
     glfwTerminate();
     Utils::panic("failed to create GLFW window");
@@ -36,7 +36,7 @@ void Init(int _width, int _heigth, const char *title) {
   }
   Debug::info("GLAD initialized");
 
-  glViewport(0, 0, width, heigth);
+  glViewport(0, 0, width, height);
   glfwSetFramebufferSizeCallback(window, SizeCallback);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_MULTISAMPLE);

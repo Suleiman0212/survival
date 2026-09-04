@@ -7,7 +7,7 @@
 
 namespace Window {
 extern GLFWwindow *window;
-extern int width, heigth;
+extern int width, height;
 
 void Init(int width, int heigth, const char *title);
 void StartFrame(float red, float green, float blue);

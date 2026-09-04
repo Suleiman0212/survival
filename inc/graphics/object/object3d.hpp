@@ -44,10 +44,12 @@ public:
            Texture &texture)
       : mesh(mesh), transform(transform), shader(shader), texture(texture) {}
 
-  void Draw(Camera3d camera);
+  void Draw(Camera3d &camera);
 
-  Mesh3d &mesh;
   Transform3d &transform;
+
+private:
+  Mesh3d &mesh;
   Shader &shader;
   Texture &texture;
 };

@@ -26,6 +26,6 @@ glm::mat4 Camera3d::View() const {
 
 glm::mat4 Camera3d::Projection() const {
   return glm::perspective(glm::radians(yFov),
-                          (float)Window::width / (float)Window::heigth, zNear,
+                          (float)Window::width / (float)Window::height, zNear,
                           zFar);
 }

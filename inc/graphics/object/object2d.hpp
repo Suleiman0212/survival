@@ -45,8 +45,10 @@ public:
 
   void Draw();
 
-  Mesh2d &mesh;
   Transform2d &transform;
+
+private:
+  Mesh2d &mesh;
   Shader &shader;
   Texture &texture;
 };

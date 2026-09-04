@@ -2,7 +2,7 @@
 #include "graphics/window.hpp"
 #include <glm/glm.hpp>
 
-void Object3d::Draw(Camera3d camera) {
+void Object3d::Draw(Camera3d &camera) {
 
   glm::mat4 view = camera.View();
   glm::mat4 projection = camera.Projection();

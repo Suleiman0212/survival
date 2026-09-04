@@ -5,7 +5,7 @@
 
 void Object2d::Draw() {
   glm::mat4 projection =
-      glm::ortho(0.0f, (float)Window::width, (float)Window::heigth, 0.0f);
+      glm::ortho(0.0f, (float)Window::width, (float)Window::height, 0.0f);
 
   glm::mat4 model = transform.Model();
 

@@ -5,6 +5,7 @@
 #include "graphics/material/shader.hpp"
 #include "graphics/mesh/mesh3d.hpp"
 #include "graphics/mesh/primitives.hpp"
+#include "graphics/object/heightmap3d.hpp"
 #include "graphics/object/object3d.hpp"
 #include "graphics/window.hpp"
 #include "help/debug.hpp"
