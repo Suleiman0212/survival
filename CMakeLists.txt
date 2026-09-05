@@ -31,7 +31,6 @@ add_executable(survival
     src/graphics/mesh/mesh3d.cpp
     src/graphics/object/object2d.cpp
     src/graphics/object/object3d.cpp
-    src/graphics/object/heightmap3d.cpp
 
     lib/glad/glad.c
 

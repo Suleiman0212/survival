@@ -34,5 +34,5 @@ build/
 *.out
 *.app
 
-# Egui
-*.ini
+# Imgui
+imgui.ini

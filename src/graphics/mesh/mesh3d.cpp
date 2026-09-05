@@ -1,42 +1,82 @@
 #include "graphics/mesh/mesh3d.hpp"
-#include <glad/glad.h>
 
-Mesh3d::Mesh3d(std::vector<Mesh3dVertex> vertices,
-               std::optional<std::vector<Mesh3dIndex>> indices)
-    : vertices(vertices), indices(indices) {
+Mesh3d::Mesh3d(const void *vertices, size_t vertexCount, size_t vertexSize,
+               const std::optional<std::vector<Mesh3dIndex>> indices,
+               const VertexLayout &layout)
+    : vertexCount(vertexCount),
+      indexCount(indices.has_value() ? indices->size() : 0) {
+  indicesEnabled = indices.has_value();
 
   glGenVertexArrays(1, &VAO);
   glGenBuffers(1, &VBO);
-  if (indices.has_value()) {
-    EBO.emplace();
-    glGenBuffers(1, &EBO.value());
+  if (indicesEnabled) {
+    glGenBuffers(1, &EBO);
   }
   glBindVertexArray(VAO);
 
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Mesh3dVertex),
-               vertices.data(), GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, vertexCount * vertexSize, vertices,
+               GL_STATIC_DRAW);
 
-  if (indices.has_value()) {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO.value());
+  if (indicesEnabled) {
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                  indices.value().size() * sizeof(Mesh3dIndex),
                  indices.value().data(), GL_STATIC_DRAW);
   }
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Mesh3dVertex),
-                        (void *)0);
-  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Mesh3dVertex),
-                        (void *)offsetof(Mesh3dVertex, uv));
-  glEnableVertexAttribArray(0);
-  glEnableVertexAttribArray(1);
+
+  for (auto attribute : layout.attributes) {
+    glVertexAttribPointer(attribute.location, attribute.componentCount,
+                          attribute.type, attribute.normalized, layout.stride,
+                          (void *)attribute.offset);
+    glEnableVertexAttribArray(attribute.location);
+  }
+}
+
+Mesh3d::~Mesh3d() {
+  glDeleteVertexArrays(1, &VAO);
+  glDeleteBuffers(1, &VBO);
+  if (indicesEnabled)
+    glDeleteBuffers(1, &EBO);
 }
 
 void Mesh3d::Draw() {
   glBindVertexArray(VAO);
-  if (!indices.has_value())
-    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+  if (indicesEnabled)
+    glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
   else {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO.value());
-    glDrawElements(GL_TRIANGLES, indices->size(), GL_UNSIGNED_INT, 0);
+    glDrawArrays(GL_TRIANGLES, 0, vertexCount);
   }
+}
+
+Mesh3d::Mesh3d(Mesh3d &&other) noexcept
+    : VBO(other.VBO), VAO(other.VAO), EBO(other.EBO),
+      indicesEnabled(other.indicesEnabled), vertexCount(other.vertexCount),
+      indexCount(other.indexCount) {
+  other.VAO = 0;
+  other.VBO = 0;
+  other.EBO = 0;
+  other.indicesEnabled = false;
+}
+
+Mesh3d &Mesh3d::operator=(Mesh3d &&other) noexcept {
+  if (this != &other) {
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    if (indicesEnabled)
+      glDeleteBuffers(1, &EBO);
+
+    VAO = other.VAO;
+    VBO = other.VBO;
+    EBO = other.EBO;
+    indicesEnabled = other.indicesEnabled;
+    vertexCount = other.vertexCount;
+    indicesEnabled = other.indicesEnabled;
+
+    other.VAO = 0;
+    other.VBO = 0;
+    other.EBO = 0;
+    other.indicesEnabled = 0;
+  }
+  return *this;
 }

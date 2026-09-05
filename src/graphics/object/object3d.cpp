@@ -1,5 +1,4 @@
 #include "graphics/object/object3d.hpp"
-#include "graphics/window.hpp"
 #include <glm/glm.hpp>
 
 void Object3d::Draw(Camera3d &camera) {
@@ -8,12 +7,11 @@ void Object3d::Draw(Camera3d &camera) {
   glm::mat4 projection = camera.Projection();
   glm::mat4 model = transform.Model();
 
-  shader.Bind();
-  shader.SetMat4("view", view);
-  shader.SetMat4("projection", projection);
-  shader.SetMat4("model", model);
+  shader->Bind();
+  shader->SetMat4("view", view);
+  shader->SetMat4("projection", projection);
+  shader->SetMat4("model", model);
 
-  texture.Bind(GL_TEXTURE0);
-  shader.SetInt("textureZero", 0);
+  material->Bind(shader);
   mesh.Draw();
 }

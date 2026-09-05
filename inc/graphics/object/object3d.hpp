@@ -2,9 +2,10 @@
 
 #include "graphics/camera/camera3d.hpp"
 #include "graphics/data/transform3d.hpp"
+#include "graphics/material/material.hpp"
 #include "graphics/material/shader.hpp"
-#include "graphics/material/texture.hpp"
 #include "graphics/mesh/mesh3d.hpp"
+#include <memory>
 
 static inline const char *DEFAULT_OBJECT3D_VERTEX_SHADER_SOURCE = R"(
   #version 330 core
@@ -40,16 +41,15 @@ static inline const char *DEFAULT_OBJECT3D_FRAGMENT_SHADER_SOURCE = R"(
 
 class Object3d {
 public:
-  Object3d(Mesh3d &mesh, Transform3d &transform, Shader &shader,
-           Texture &texture)
-      : mesh(mesh), transform(transform), shader(shader), texture(texture) {}
+  Object3d(Mesh3d mesh, Transform3d transform, std::shared_ptr<Shader> shader,
+           std::shared_ptr<Material> material)
+      : mesh(std::move(mesh)), transform(std::move(transform)), shader(shader),
+        material(material) {}
 
   void Draw(Camera3d &camera);
 
-  Transform3d &transform;
-
-private:
-  Mesh3d &mesh;
-  Shader &shader;
-  Texture &texture;
+  Mesh3d mesh;
+  Transform3d transform;
+  std::shared_ptr<Shader> shader;
+  std::shared_ptr<Material> material;
 };
